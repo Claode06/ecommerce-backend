@@ -1,0 +1,20 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class ProductVariantResource extends JsonResource
+{
+    public function toArray(Request $request): array
+    {
+        return [
+            'id' => $this->id,
+            'label' => $this->label,
+            'price' => (float) $this->price,
+            'sku' => $this->sku,
+            'stock' => (int) $this->warehouseStocks()->sum('quantity'),
+        ];
+    }
+}
